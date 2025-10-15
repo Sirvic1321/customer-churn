@@ -1,0 +1,9 @@
+name: churn-env
+dependencies:
+  - python=3.10
+  - scikit-learn
+  - pandas
+  - joblib
+  - pip
+  - pip:
+      - azureml-defaults
