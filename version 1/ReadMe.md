@@ -1,161 +1,105 @@
-Customer Churn Prediction — Version 1 (Deployed on Azure ML)
+# 🧠 Customer Churn Prediction — Version 1
 
-End-to-End Machine Learning Deployment | Microsoft Azure ML | REST API Endpoint
+## 🚀 Overview
+This project predicts whether a customer is likely to **churn** (stop using a service) based on their demographic and subscription data.  
+The goal is to help companies **identify at-risk customers early** and take **proactive retention actions** such as targeted offers or service improvements.
 
-
----
-
-🌍 Project Overview
-
-This project predicts whether a customer is likely to churn (leave the service) based on their demographic and usage data.
-It enables companies to identify at-risk customers early and take proactive steps to improve retention and revenue.
-
-The full lifecycle was implemented on Microsoft Azure Machine Learning, from data preprocessing to deployment as a REST API using Managed Online Endpoints.
-
+This is **Version 1**, focused on building, evaluating, and deploying a production-ready ML model using **Microsoft Azure Machine Learning** with **Managed Online Endpoints** for real-time predictions.
 
 ---
 
-📊 Problem Statement
-
-Customer churn is a major business challenge, especially in the telecommunications industry.
-By predicting churn, companies can:
-
-Retain valuable customers,
-
-Personalize offers, and
-
-Reduce marketing costs.
-
-
-Objective:
-
-> Build and deploy a machine learning model that predicts customer churn and exposes it via an Azure-hosted REST API for real-time predictions.
-
-
-
+## 🎯 Objectives
+- Perform data preprocessing and feature encoding  
+- Train a machine learning model to predict churn  
+- Evaluate the model using standard metrics  
+- Deploy it as a REST API on Azure ML  
+- Test the endpoint with real-time inference  
 
 ---
 
-Dataset Description
+## 📊 Dataset Description
+**Source:** IBM Telco Customer Churn Dataset  
 
-Source: IBM Telco Customer Churn Dataset
+| Feature | Description |
+|----------|-------------|
+| `gender` | Customer gender (Male/Female) |
+| `SeniorCitizen` | Indicates if the customer is a senior |
+| `Partner`, `Dependents` | Family and social details |
+| `tenure` | Number of months with the company |
+| `PhoneService`, `InternetService` | Types of services used |
+| `Contract`, `PaymentMethod` | Contract type and payment details |
+| `MonthlyCharges`, `TotalCharges` | Billing information |
+| `Churn` | Target variable (Yes = 1, No = 0) |
 
-Feature      Description
-
-gender   -    Customer gender (Male/Female)
-SeniorCitizen Whether the customer is a senior citizen
-Partner, Dependents Family/social status
-tenure Duration with the company (months)
-PhoneService, InternetService, etc. Customer’s service subscriptions
-Contract, PaperlessBilling, PaymentMethod Type of contract & billing method
-MonthlyCharges, TotalCharges Payment details
-Churn Target variable (Yes = 1, No = 0)
-
-
-Dataset Size: ~7,000 records
-Class Distribution: ~27% churned customers
-
+**Size:** ~7,000 records  
+**Churn Rate:** ~27%  
 
 ---
 
-🧮 Model Overview
+## 🧮 Model Development
 
-The model uses a RandomForestClassifier, chosen for its robustness, interpretability, and ability to handle mixed feature types.
+**Algorithm:** Random Forest Classifier  
 
-🧱 Pipeline Summary
+**Why Random Forest?**
+- Handles mixed numerical and categorical features well  
+- Robust to overfitting  
+- Provides feature importance insights  
 
-1. Data Cleaning & Feature Encoding
-
-
-2. Exploratory Data Analysis (EDA)
-
-
-3. Model Training & Hyperparameter Tuning
-
-
-4. Evaluation & Metrics Visualization
-
-
-5. Deployment to Azure ML Endpoint
-
-
-
+**Pipeline Steps:**
+1. Data cleaning and missing value handling  
+2. Feature encoding (`LabelEncoder`, `OneHotEncoder`)  
+3. Train-test split (80/20)  
+4. Model training and hyperparameter tuning  
+5. Model evaluation  
+6. Registration and deployment on Azure ML  
 
 ---
 
-⚙️ Tech Stack & Tools
+## 📈 Model Evaluation
 
-Category Tools Used
+| Metric | Score |
+|--------|--------|
+| Accuracy | 0.87 |
+| Precision | 0.82 |
+| Recall | 0.79 |
+| F1-Score | 0.80 |
+| ROC-AUC | 0.91 |
 
-Language Python 3.10
-Libraries pandas, scikit-learn, numpy, joblib, json
-Cloud Platform Microsoft Azure Machine Learning
-Deployment Managed Online Endpoint
-Environment Conda YAML configuration
-Version Control GitHub
+📊 *(Confusion matrix and ROC curve images are stored in `/evaluation/`)*
 
+Example:
 
-
----
-
-📈 Model Evaluation
-
-Metric Value
-
-Accuracy 0.87
-Precision 0.82
-Recall 0.79
-F1 Score 0.80
-ROC-AUC 0.91
-
-
-Visuals:
-
-evaluation/confusion_matrix.png  
-evaluation/roc_curve.png
-
-(Insert confusion matrix and ROC curve images above.)
-
+evaluation/ ├── confusion_matrix.png └── roc_curve.png
 
 ---
 
-🧩 System Architecture
+## ⚙️ Tech Stack
 
-flowchart LR
-A[Customer Data] --> B[Data Preprocessing]
-B --> C[Model Training]
-C --> D[Evaluation & Validation]
-D --> E[Azure Model Registry]
-E --> F[Azure Online Endpoint]
-F --> G[REST API Prediction]
-
-
----
-
-🌐 Deployment Details
-
-Attribute Value
-
-Endpoint Name customer-churn-endpoint
-Region East US
-Compute Type Standard_DS3_v2
-Deployment Mode Managed Online Endpoint
-Status ✅ Successfully Deployed
-Scoring URI <your_endpoint_scoring_uri>
-
-
+| Category | Tools |
+|-----------|-------|
+| **Language** | Python 3.10 |
+| **Libraries** | Pandas, NumPy, Scikit-learn, Joblib, JSON |
+| **Platform** | Microsoft Azure ML |
+| **Deployment** | Azure Managed Online Endpoint |
+| **Version Control** | Git + GitHub |
 
 ---
 
-🧠 Sample Inference
+## 🌐 Deployment Details
+| Attribute | Value |
+|------------|--------|
+| **Endpoint Name** | `customer-churn-endpoint` |
+| **Compute Type** | `Standard_DS1_v2` |
+| **Region** | East US |
+| **Status** | ✅ Successfully Deployed |
 
-Input Example:
-
+**Sample Test Input:**
+```json
 {
   "data": [[1, 0, 35, 1, 0, 70.35, 1, 2, 3, 4, 5]]
 }
 
-Output Example:
+Sample Output:
 
 {
   "prediction": "Not Churn",
@@ -165,122 +109,64 @@ Output Example:
 
 ---
 
-⚡ Quick Start
+📂 Project Structure
 
-Run locally or reproduce on Azure ML.
-
-# 1. Clone the repository
-git clone https://github.com/yourusername/customer-churn-v1.git
-cd customer-churn-v1
-
-# 2. Create and activate environment
-conda env create -f environment/conda.yaml
-conda activate churn-env
-
-# 3. Train the model
-python src/train.py
-
-# 4. Deploy model to Azure
-python deployment/endpoint_deploy.py
-
-# 5. Test the endpoint
-python deployment/test_endpoint.py
-
-
----
-
-📦 Project Structure
-
-customer-churn-v1/
+customer-churn/version1/
 │
 ├── data/
 │ └── customer_churn.csv
 │
 ├── src/
-│ ├── train.py
+│ ├── train_model.py
 │ ├── score.py
 │
-├── environment/
-│ └── conda.yaml
+├── deployment/
+│ ├── register_model.py
+│ ├── deploy_endpoint.py
 │
 ├── evaluation/
 │ ├── confusion_matrix.png
 │ └── roc_curve.png
 │
-├── deployment/
-│ ├── register_model.py
-│ ├── endpoint_deploy.py
-│ └── test_endpoint.py
-│
-├── assets/
-│ ├── architecture_diagram.png
-│ ├── endpoint_screenshot.png
+├── environment/
+│ └── conda.yaml
 │
 └── README.md
 
 
 ---
 
-🔮 Future Improvements (Version 2 Roadmap)
+🔮 Future Enhancements (Version 2 Roadmap)
 
-🧩 Explainability
-
-Integrate SHAP Explainability Dashboard to visualize which features drive churn.
-
-> Example: Customers with “Month-to-month” contracts and “Electronic check” payments have higher churn risk.
+1. SHAP Explainability Dashboard
+Visualize feature contributions and interpret predictions to understand what drives customer churn.
 
 
-
-💻 Streamlit Frontend
-
-Build an interactive Streamlit app for live predictions.
-
-Input customer data dynamically
-
-Display churn prediction and confidence
-
-Visualize feature impacts
+2. Streamlit Frontend
+Build an interactive Streamlit web app that allows users to input customer data, view predictions, and see churn risk in real time.
 
 
-⚙️ Automated Retraining
-
-Implement MLOps automation to retrain the model when new data arrives using:
-
-Azure ML pipelines
-
-Automated model versioning
-
-Data drift detection
+3. Automated Model Retraining (MLOps)
+Implement a retraining pipeline that automatically updates the model when new data is uploaded.
 
 
-🗄️ Database Integration
+4. Database Integration
+Connect with Azure SQL or Cosmos DB for live data retrieval and prediction storage.
 
-Connect with Azure SQL or Cosmos DB for real-time data ingestion.
-
-
----
-
-💡 Key Takeaways
-
-Mastered Azure ML End-to-End workflow — training → deployment → testing
-
-Gained practical experience with debugging containers, quotas, and environments
-
-Built production-level ML assets ready for integration and scaling
-
-Improved understanding of MLOps concepts and model interpretability
 
 
 
 ---
 
-🙏 Acknowledgements
+💡 Key Learnings
 
-Microsoft Azure ML Team — for the deployment ecosystem
+Understood end-to-end ML lifecycle: data → training → deployment → inference
 
-IBM Telco Dataset — open-source churn dataset
+Learned how to manage Azure environments, quotas, and compute instances
 
-Scikit-learn Community — for robust ML libraries
+Gained hands-on experience with model debugging and container crash resolution
+
+Improved understanding of feature engineering, business problem framing, and deployment best practices
 
 
 
@@ -288,16 +174,10 @@ Scikit-learn Community — for robust ML libraries
 
 👨‍💻 Author
 
-Victor Island
-Machine Learning Engineer | Mechatronics Graduate | AI Enthusiast
+Victor Isuo
+Microsoft Certified AI/ML Engineer 
 
-📧 Email: [your.email@example.com]
-🔗 LinkedIn: [linkedin.com/in/yourprofile]
-💻 GitHub: [github.com/yourgithub]
+📧 Email: victorisuo@gmail.com
+🔗 LinkedIn: linkedin.com/in/victor-isuo-a02b6171
+💻 GitHub: github.com/Sirvic1321
 
-
----
-
-📄 License
-
-This project is licensed under the MIT License — see the LICENSE file for details.
