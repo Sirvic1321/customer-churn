@@ -18,7 +18,7 @@ This is **Version 1**, focused on building, evaluating, and deploying a producti
 ---
 
 ## 📊 Dataset Description
-**Source:** WA_Telco Customer Churn Dataset  
+**Source:** WA_Telecom Customer Churn Dataset  
 
 | Feature Example | Description |
 |------------------|-------------|
@@ -192,4 +192,5 @@ customer-churn/version1/
 📧 **Email:** [victorisuo1321@gmail.com](mailto:victorisuo@gmail.com)
 🔗 **LinkedIn:** [linkedin.com/in/victor-isuo-a02b6171](https://linkedin.com/in/victor-isuo-a02b6171)
 💻 **GitHub:** [github.com/Sirvic1321](https://github.com/Sirvic1321)
+
 
